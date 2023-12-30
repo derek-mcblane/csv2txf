@@ -17,6 +17,7 @@
 """Utility methods/classes."""
 
 import sys
+from enum import IntEnum
 
 
 class Error(Exception):
@@ -65,6 +66,15 @@ class Transaction(object):
         ]
         formatted_data = [(fmt % value) for (fmt, value) in data if value]
         return ','.join(formatted_data)
+
+
+class EntryCode(IntEnum):
+    SHORT_A = 321
+    SHORT_B = 711
+    SHORT_C = 712
+    LONG_A = 323
+    LONG_B = 713
+    LONG_C = 714
 
 
 def txfDate(date):

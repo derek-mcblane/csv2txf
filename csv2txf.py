@@ -64,17 +64,21 @@ def GetSummary(broker_name, filename, tax_year):
     broker = GetBroker(broker_name, filename)
     total_cost = Decimal(0)
     total_sales = Decimal(0)
+    total_adjustment = Decimal(0)
     txn_list = broker.parseFileToTxnList(filename, tax_year)
     for txn in txn_list:
         total_cost += txn.costBasis
         total_sales += txn.saleProceeds
+        if txn.adjustment:
+            total_adjustment += txn.adjustment
 
     return '\n'.join([
         '%s summary report for %d' % (broker.name(), tax_year),
         'Num sale txns:  %d' % len(txn_list),
         'Total cost:     $%.2f' % total_cost,
         'Total proceeds: $%.2f' % total_sales,
-        'Net gain/loss:  $%.2f' % (total_sales - total_cost),
+        'Total adjustment: $%.2f' % total_adjustment,
+        'Net gain/loss:  $%.2f' % (total_sales + total_adjustment - total_cost),
     ])
 
 def main(argv):

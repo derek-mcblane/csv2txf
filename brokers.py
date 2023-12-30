@@ -33,13 +33,15 @@ To define a new broker:
 from interactive_brokers import InteractiveBrokers
 from tdameritrade import TDAmeritrade
 from vanguard import Vanguard
+from robinhood_1099_pdf_extracted import Robinhood1099PDFExtracted
 
 
 BROKERS = {
-    'amtd': TDAmeritrade,
     'ib': InteractiveBrokers,
+    'amtd': TDAmeritrade,
     'tdameritrade': TDAmeritrade,
     'vanguard': Vanguard,
+    'robinhood-1099pdf': Robinhood1099PDFExtracted,
 }
 
 
@@ -48,7 +50,6 @@ def DetectBroker(filename):
         if hasattr(broker, 'isFileForBroker'):
             if broker.isFileForBroker(filename):
                 return broker
-
     return None
 
 
