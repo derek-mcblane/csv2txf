@@ -47,8 +47,10 @@ def Warning(str):
 class Transaction(object):
     def __init__(self):
         self.desc = None
+        self.buyDate = None
         self.buyDateStr = None
         self.costBasis = None
+        self.sellDate = None
         self.sellDateStr = None
         self.saleProceeds = None
         self.adjustment = None
